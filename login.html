@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App Veterinaria</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body background="img/dogs2.webp"; background-size: 100% 120%; background-repeat: no-repeat;> 
+    <h1 style="background-color: rgb(12, 82, 3); color: aliceblue;" align="center"> Proyecto Clinica Veterinaria </h1>
+    <p style="color: aliceblue; background-color: rgb(14, 71, 2); font-size: large;" align="center" style="background-color: rgb(2, 100, 24);">Sistema de citas</p>
+    <div id="hideBox">
+        <div id="highBox">
+            <center>
+                <form method="post" >
+                    <input type="text"
+                           name="usrname"
+                           id="usrname"
+                           class="textbox"
+                           value="Username"
+                           style="width: 300px;"
+                           autocomplete="off"
+                           onfocus="removeDefault(usuario)"
+                           onblur="setDefault(usuario)"/><br><br>
+                    <input type="password"
+                           name="password"
+                           id="password"
+                           class="textbox"
+                           value="Password"
+                           style="width: 300px;"
+                           autocomplete="off"
+                           onfocus="removeDefault(password)"
+                           onblur="setDefault(password)"/><br><br>
+                    <input type="hidden" 
+                           name="md5password"/>
+                    <input type="submit" 
+                           name="btn" 
+                           value="Login" 
+                           class="submitbutton"/>
+                </form>
+            </center>
+        </div>
+        <br>
+    <center>
+        <nav style="background-color: rgb(132, 190, 126); color: aliceblue;">
+            <a href="#">Contacto</a>
+            <a href="#">Mi Mascota</a>
+            <a href="#">Agendar una cita</a>
+            <a href="#">Nuestro equipo</a>
+         
+        </nav>
+    </center>
+  
+    </form>
+
+
+</body>
+
+</html>
+
+
+
+
