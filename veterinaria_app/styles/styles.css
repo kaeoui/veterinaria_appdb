@@ -1,0 +1,48 @@
+body {
+    background-color: #f4f4f4;
+}
+.container {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 100vh;            /* Ocupa el 100% de la altura de la ventana */
+    margin: 0;                /* Elimina cualquier margen predeterminado */
+    flex-direction: column;
+    
+}
+
+.boton-seleccion {
+    width: 250px;
+    height: 50px;
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    border-radius: 30px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    padding: 10px 10px; 
+}
+
+.container a {
+    text-align: center;
+    display: block;
+
+}
+
+.boton-seleccion:hover {
+
+    background-color: rgb(228, 191, 123);
+}
+
+.navbar {
+    padding: 10px;
+    text-align: right;
+}
+
+.navbar a {
+    color: black;
+    font-size: 16px;
+}
