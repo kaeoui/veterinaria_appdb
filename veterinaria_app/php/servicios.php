@@ -1,3 +1,22 @@
+<?php
+// Iniciar la sesión
+session_start();
+
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['id_usuario'])) {
+    // Si no está logueado, redirigir a la página de inicio de sesión
+    header("Location: login.php");
+    exit();
+}
+
+include('../conexion.php');
+
+$sql = "SELECT nombre, descripcion, precio, duracion_estimada FROM servicios";
+$result = $conexion->query($sql);
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -46,14 +65,30 @@
 
 <h2 style="text-align: center;"> Servicios Disponibles </h2> 
 
+
 <div class="grid-container">
-    <div class="grid-item">Elemento 1</div>
-    <div class="grid-item">Elemento 2</div>
-    <div class="grid-item">Elemento 3</div>
-    <div class="grid-item">Elemento 4</div>
-    <div class="grid-item">Elemento 5</div>
-    <div class="grid-item">Elemento 6</div>
+        <?php
+        // Verificar si la consulta devolvió resultados
+        if ($result->num_rows > 0) {
+            // Recorrer las filas y mostrar un div por cada servicio
+            while($row = $result->fetch_assoc()) {
+                echo '<div class="grid-item">';
+                echo '<h3>' . htmlspecialchars($row["nombre"]) . '</h3>';
+                echo '<p>' . htmlspecialchars($row["descripcion"]) . '</p>';
+                echo '<p>Precio: $' . htmlspecialchars($row["precio"]) . '</p>';
+                echo '<p>Duración: ' . htmlspecialchars($row["duracion_estimada"]) .  '</p>';
+                echo '</div>';
+            }
+        } else {
+            echo "No se encontraron servicios.";
+        }
+        ?>
+    </div>
 </div>
 
+
+<?php
+$conn->close();
+?>
 </body>
 </html>

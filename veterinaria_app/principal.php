@@ -1,3 +1,9 @@
+
+<div class="navbar">
+    <a href="php/cerrar_sesion.php">Cerrar sesión</a>
+</div>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
