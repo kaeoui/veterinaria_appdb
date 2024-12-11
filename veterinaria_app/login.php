@@ -1,98 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>App Veterinaria</title>
+    <title>Login</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            background-image: url('img/dogs2.webp');
-            background-size: 100% 120%;
-            background-repeat: no-repeat;
-        }
-
-        h1 {
-            background-color: rgb(12, 82, 3);
-            color: aliceblue;
-            text-align: center;
-        }
-
-        p {
-            color: aliceblue;
-            background-color: rgb(14, 71, 2);
-            font-size: large;
-            text-align: center;
-        }
-
-        nav {
-            background-color: rgb(132, 190, 126);
-            color: aliceblue;
-            text-align: center;
-        }
-
-        nav a {
-            color: aliceblue;
-            margin: 0 15px;
-            text-decoration: none;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-    </style>
 </head>
+<body> 
+    <header>
+    <div class="header-container">
+        <img src="img/logo_icon.png" alt="Logo Veterinaria" class="logo">
+        <h1>Veterinaria Patitas Felices</h1>
+        <nav>
+            <ul>
+                <li><a href="pagina_principal.php">Home</a></li>
+            </ul>
+        </nav>
+        
+    </div>
+    </header>
 
-<body>
-    <h1>Proyecto Clínica Veterinaria</h1>
-    <p>Sistema de citas</p>
-
-    <div id="hideBox">
-        <div id="highBox">
-            <center>
+    <section id="login">
+        <div id="login-box">
+        <h2>Bienvenido al Sistema Citas</h2>
+        <p>Inicio de Sesión</p>
+    
+                <center>
                 <form id="loginForm" method="post" action="">
                     <input type="text" name="usuario_nombre" id="usuario_nombre" class="textbox"
-                        placeholder="Nombre de usuario" style="width: 300px;" autocomplete="off" required /><br><br>
+                        placeholder="Nombre de usuario" style="width: 300px; height: 30px;" autocomplete="off" required /><br><br>
                     <input type="password" name="contraseña" id="contraseña" class="textbox"
-                        placeholder="Contraseña" style="width: 300px;" autocomplete="off" required /><br><br>
+                        placeholder="Contraseña" style="width: 300px; height: 30px;" autocomplete="off" required /><br><br>
                     <input type="submit" name="btn" value="Iniciar sesión" class="submitbutton" />
                 </form>
-            </center>
-        </div>
-        <br>
-        <center>
-            <nav>
-                <a href="#">Contacto</a>
-                <a href="php/crear_usuario.php">Crear usuario</a>
-                <a href="#">Agendar una cita</a>
-                <a href="#">Nuestro equipo</a>
-            </nav>
-        </center>
-    </div>
+                </center>
+           
+        <p>Sino tienes una cuenta debes Registrarte</p>
+        <li><a href="php/crear_usuario.php">Crear una Cuenta</a></li>
+     </div>
+    </section>
+
+
+    <footer>
+        <p>&copy; 2024 Veterinaria Patitas Felices. Todos los derechos reservados.</p>
+        <p>Teléfono: +506 7000 1234 | Correo: contacto@patitasfelices.com</p>
+    </footer>
+
+</body>
+
+</html>
+
+
 
     <?php
-    // Iniciar la sesión
     session_start();
 
-    // Conectar a la base de datos
-    $mysqli = new mysqli('localhost', 'root', '', 'veterinaria_db');
+    $mysqli = new mysqli('localhost', 'root', 'karina', 'veterinaria_db');
 
-    // Verificar la conexión
     if ($mysqli->connect_error) {
         die("Error de conexión: " . $mysqli->connect_error);
     }
 
-    // Verificar si se hizo clic en el botón de inicio de sesión
     if (isset($_POST['btn'])) {
-        // Validar que los campos no estén vacíos
         if (empty($_POST['usuario_nombre']) || empty($_POST['contraseña'])) {
             echo 'Por favor, ingrese usuario y contraseña.';
         } else {
             $usuario_nombre = $mysqli->real_escape_string($_POST['usuario_nombre']);
             $contraseña = $_POST['contraseña'];
-
-            // Consulta para obtener las credenciales del usuario
             $query = "SELECT * FROM usuarios WHERE usuario_nombre = ?";
             $stmt = $mysqli->prepare($query);
             $stmt->bind_param("s", $usuario_nombre);
@@ -102,14 +76,11 @@
             if ($result->num_rows > 0) {
                 $usuarioData = $result->fetch_assoc();
 
-                // Verificar la contraseña
                 if (password_verify($contraseña, $usuarioData['contraseña'])) {
-                    // Inicio de sesión exitoso, establecer la sesión
                     $_SESSION['id_usuario'] = $usuarioData['id_usuario'];  // Ajusta según la columna de ID en tu DB
                     $_SESSION['usuario_nombre'] = $usuarioData['usuario_nombre'];
 
-                    // Redirigir a la página principal
-                    header('Location: principal.php');
+                    header('Location: pagina_principal.php');
                     exit();
                 } else {
                     echo "Contraseña incorrecta.";
